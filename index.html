@@ -20,8 +20,12 @@
 			flex-direction: column;
         }
 		
-		#content {
+		.content {
 			max-width: 650px;
+		}
+		
+		.footer {
+			text-align: center;
 		}
         
         h1,
@@ -36,7 +40,7 @@
     </style>
 </head>
 <body>
-	<div id="content">
+	<div class="content">
 		<header>
 			<h1>Feds Budget Visualization</h1>
 			<aside>Understanding where your money is going.</aside>
@@ -44,9 +48,12 @@
 		<p>Trees live in your fan brush, but you have to scare them out. A beautiful little sunset. Imagination is the key to painting. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so.</p>
 
 		<p>Exercising the imagination, experimenting with talents, being creative; these things, to me, are truly the windows to your soul. As trees get older they lose their chlorophyll. It's hard to see things when you're too close. Take a step back and look. It's cold, but it's beautiful.</p>
+		
+		<p>Made by Deon Hua and Yu Chen Hou, Math Feds Councilors.</p>
 	</div>
 		
 	<div id="sankeyChart"/>
+
 	<script>
 	var configSankey = {
 		margin: { top: 10, left: 10, right: 10, bottom: 10 },
