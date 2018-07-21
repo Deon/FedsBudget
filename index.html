@@ -14,20 +14,20 @@
             font-size: 18px;
             color: #444;
             padding: 0 10px;
-			display: flex; 
+			display: flex;
 			align-items: center;
 			justify-content: center;
 			flex-direction: column;
         }
-		
+
 		.content {
 			max-width: 650px;
 		}
-		
+
 		.footer {
 			text-align: center;
 		}
-        
+
         h1,
         h2,
         h3 {
@@ -42,16 +42,24 @@
 <body>
 	<div class="content">
 		<header>
-			<h1>Feds Budget Visualization</h1>
+			<h1>Feds 2017-18 Budget Visualization</h1>
 			<aside>Understanding where your money is going.</aside>
 		</header>
-		<p>Trees live in your fan brush, but you have to scare them out. A beautiful little sunset. Imagination is the key to painting. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so.</p>
+    <p>This is a Sankey chart to visualize the <a href="https://uwaterloo.ca/feds/sites/ca.feds/files/uploads/files/2017-2018_federation_of_students_budget.xlsx">Feds Budget for the 2017-18 Fiscal Year.</a></p>
+    <p>In the interest of readability, we didn't break down the numbers past the service/office level. Additional breakdowns can be found within the spreadsheet.</p>
 
-		<p>Exercising the imagination, experimenting with talents, being creative; these things, to me, are truly the windows to your soul. As trees get older they lose their chlorophyll. It's hard to see things when you're too close. Take a step back and look. It's cold, but it's beautiful.</p>
-		
-		<p>Made by Deon Hua and Yu Chen Hou, Math Feds Councilors.</p>
+    <p>Hover over a spending item (ie. President Portfolio) to easily see its breakdown.</p>
+
+    <p>If you have any feedback, please let us know via:</p>
+    <ul>
+      <li><a href="https://www.facebook.com/FedsCouncilMath/">Facebook</a></li>
+      <li><a href="http://bit.ly/MathCouncilFeedback">Anonymously thru Google Form</a></li>
+      <li>Emailing <a href="mailto:deon.hua@edu.uwaterloo.ca">Deon</a> or <a href="mailto:yc3hou@edu.uwaterloo.ca">Yu Chen</a></li>
+    </ul>
+
+		<p>Made by Deon Hua and Yu Chen Hou, Feds Math Councilors.</p>
 	</div>
-		
+
 	<div id="sankeyChart"/>
 
 	<script>
@@ -85,7 +93,7 @@
 	  {id: 0, name: "Total Expenses", color: "#f08080"},
 
 	  {id: 1, name: "President Portfolio", color: "orange"},
-	  {id: 2, name: "VP Operations and Finance Portfolio", color: "purple"},  
+	  {id: 2, name: "VP Operations and Finance Portfolio", color: "purple"},
 	  {id: 3, name: "VP Student Life Portfolio", color: "blue"},
 	  {id: 4, name: "VP Education Portfolio", color: "pink"},  
 	  {id: 5, name: "Marketing", color: "#800000"},
@@ -97,12 +105,12 @@
 	  {id: 10, name: "President Office", color: "orange"},
 	  {id: 11, name: "Orientation", color: "orange"},
 	  {id: 12, name: "Elections", color: "orange"},
-	  {id: 13, name: "Research and Policy Officer", color: "orange"},  
+	  {id: 13, name: "Research and Policy Officer", color: "orange"},
 	  {id: 14, name: "Student Government", color: "orange"},
-	  
+
 	  {id: 15, name: "VP Operations and Finance Office", color: "purple"},
 	  {id: 16, name: "Director of Commercial Operations", color: "purple"},
-	  
+
 	  {id: 17, name: "VP Student Life Office", color: "blue"},
 	  {id: 18, name: "Director of Campus Life", color: "blue"},
 	  {id: 19, name: "Services Manager", color: "blue"},
@@ -112,7 +120,7 @@
 	  {id: 23, name: "GLOW", color: "blue"},
 	  {id: 24, name: "SCI", color: "blue"},
 	  {id: 25, name: "Off-Campus Community", color: "blue"},
-	  {id: 26, name: "Women's Centre", color: "blue"},  
+	  {id: 26, name: "Women's Centre", color: "blue"},
 	  {id: 27, name: "Special Events", color: "blue"},
 	  {id: 28, name: "Society Relations Commissioner", color: "blue"},
 	  {id: 29, name: "ICSN", color: "blue"},
@@ -122,7 +130,7 @@
 	  {id: 33, name: "Commissions", color: "blue"},
 	  {id: 34, name: "Warrior Tribe", color: "blue"},
 	  {id: 35, name: "Mates", color: "blue"},
-	  
+
 	  {id: 36, name: "VP Education Office", color: "pink"},
 	  {id: 37, name: "Stakeholder Relations Manager", color: "pink"},
 	  {id: 38, name: "OUSA", color: "pink"},
@@ -138,7 +146,7 @@
 	  {source: 42, target: 0, value: 12000.00},
 
 	  {source: 0, target: 1, value: 98110.98},
-	  {source: 0, target: 2, value: 81931.18},  
+	  {source: 0, target: 2, value: 81931.18},
 	  {source: 0, target: 3, value: 357851.18},
 	  {source: 0, target: 4, value: 196554.46},
 	  {source: 0, target: 5, value: 191309.00},
@@ -146,19 +154,19 @@
 	  {source: 0, target: 7, value: 1272800.00},
 	  {source: 0, target: 8, value: 13000.00},
 	  {source: 0, target: 9, value: 268438.04},
-	  
+
 	  {source: 1, target: 10, value: 70981.18},
 	  {source: 1, target: 11, value: 11743.80},
 	  {source: 1, target: 12, value: 9275.00},
 	  {source: 1, target: 13, value: 1410.00},
 	  {source: 1, target: 14, value: 4701.00},
-	  
+
 	  {source: 2, target: 15, value: 77621.18},
 	  {source: 2, target: 16, value: 4310.00},
-	  
+
 	  {source: 3, target: 17, value: 92681.18},
 	  {source: 3, target: 18, value: 12850.00},
-	  {source: 3, target: 19, value: 36410.00},  
+	  {source: 3, target: 19, value: 36410.00},
 	  {source: 3, target: 20, value: 44421.00},
 	  {source: 3, target: 21, value: 15980.00},
 	  {source: 3, target: 22, value: 4490.00},
@@ -167,7 +175,7 @@
 	  {source: 3, target: 25, value: 8745.00},
 	  {source: 3, target: 26, value: 7150},
 	  {source: 3, target: 27, value: 86780},
-		{source: 3, target: 28, value: 3500},
+  	{source: 3, target: 28, value: 3500},
 	  {source: 3, target: 29, value: 6618},
 	  {source: 3, target: 30, value: 605},
 	  {source: 3, target: 31, value: 3460},
