@@ -61,7 +61,7 @@
 			dynamicSizeFontNode: {
 				enabled: true,
 				minSize: 14,
-				maxSize: 30
+				maxSize: 18
 			},
 			fontSize: 14, // if dynamicSizeFontNode not enabled
 			draggableX: false, // default [ false ]
@@ -76,23 +76,23 @@
 		},
 		tooltip: {
 			infoDiv: true,  // if false display default tooltip
-			labelSource: 'Revenues:',
-			labelTarget: 'Expenses:'
+			labelSource: 'Revenues',
+			labelTarget: 'Expenses'
 		}
 	}
 
 	var datajson = {nodes: [
-	  {id: 0, name: "Revenues", color: "green"},
+	  {id: 0, name: "Total Expenses", color: "#f08080"},
 
 	  {id: 1, name: "President Portfolio", color: "orange"},
 	  {id: 2, name: "VP Operations and Finance Portfolio", color: "purple"},  
 	  {id: 3, name: "VP Student Life Portfolio", color: "blue"},
 	  {id: 4, name: "VP Education Portfolio", color: "pink"},  
-	  {id: 5, name: "Marketing", color: "green"},
-	  {id: 6, name: "General Office", color: "green"},
-	  {id: 7, name: "Service Salaries", color: "green"},
-	  {id: 8, name: "Community Kitchen", color: "green"}, 
-	  {id: 9, name: "IT", color: "green"},
+	  {id: 5, name: "Marketing", color: "#800000"},
+	  {id: 6, name: "General Office", color: "#800000"},
+	  {id: 7, name: "Service Salaries", color: "#800000"},
+	  {id: 8, name: "Community Kitchen", color: "#800000"}, 
+	  {id: 9, name: "IT", color: "#800000"},
 	  
 	  {id: 10, name: "President Office", color: "orange"},
 	  {id: 11, name: "Orientation", color: "orange"},
@@ -127,10 +127,16 @@
 	  {id: 37, name: "Stakeholder Relations Manager", color: "pink"},
 	  {id: 38, name: "OUSA", color: "pink"},
 	  {id: 39, name: "Academic Affairs", color: "pink"},
-	  {id: 40, name: "Local Affairs", color: "pink"}
+	  {id: 40, name: "Local Affairs", color: "pink"},
+
+    {id: 41, name: "Student Fees", color: "green"},
+	  {id: 42, name: "Interest", color: "green"},
 
 	],
 	links: [
+    {source: 41, target: 0, value: 3074928.57},
+	  {source: 42, target: 0, value: 12000.00},
+
 	  {source: 0, target: 1, value: 98110.98},
 	  {source: 0, target: 2, value: 81931.18},  
 	  {source: 0, target: 3, value: 357851.18},
