@@ -34,7 +34,7 @@
             line-height: 1.2
         }
 		#sankeyChart {
-			height: 500px;
+			height: 960px;
 			width: 960px;
 		}
     </style>
@@ -49,6 +49,7 @@
     <p>In the interest of readability, we didn't break down the numbers past the service/office level. Additional breakdowns can be found within the spreadsheet.</p>
 
     <p>Hover over a spending item (ie. President Portfolio) to easily see its breakdown.</p>
+    <p>You can also drag and drop items on the chart to move them around.</p>
 
     <p>If you have any feedback, please let us know via:</p>
     <ul>
@@ -92,9 +93,9 @@
 	var datajson = {nodes: [
 	  {id: 0, name: "Total Expenses", color: "#f08080"},
 
-	  {id: 1, name: "President Portfolio", color: "orange"},
-	  {id: 2, name: "VP Operations and Finance Portfolio", color: "purple"},
-	  {id: 3, name: "VP Student Life Portfolio", color: "blue"},
+	  {id: 1, name: "President Portfolio", color: "#FF5722"},
+	  {id: 2, name: "VP Operations and Finance Portfolio", color: "#512DA8"},
+	  {id: 3, name: "VP Student Life Portfolio", color: "#3F51B5"},
 	  {id: 4, name: "VP Education Portfolio", color: "pink"},  
 	  {id: 5, name: "Marketing", color: "#800000"},
 	  {id: 6, name: "General Office", color: "#800000"},
@@ -102,34 +103,34 @@
 	  {id: 8, name: "Community Kitchen", color: "#800000"}, 
 	  {id: 9, name: "IT", color: "#800000"},
 	  
-	  {id: 10, name: "President Office", color: "orange"},
-	  {id: 11, name: "Orientation", color: "orange"},
-	  {id: 12, name: "Elections", color: "orange"},
-	  {id: 13, name: "Research and Policy Officer", color: "orange"},
-	  {id: 14, name: "Student Government", color: "orange"},
+	  {id: 10, name: "President Office", color: "#FF5722"},
+	  {id: 11, name: "Orientation", color: "#FF5722"},
+	  {id: 12, name: "Elections", color: "#FF5722"},
+	  {id: 13, name: "Research and Policy Officer", color: "#FF5722"},
+	  {id: 14, name: "Student Government", color: "#FF5722"},
 
-	  {id: 15, name: "VP Operations and Finance Office", color: "purple"},
-	  {id: 16, name: "Director of Commercial Operations", color: "purple"},
+	  {id: 15, name: "VP Operations and Finance Office", color: "#512DA8"},
+	  {id: 16, name: "Director of Commercial Operations", color: "#512DA8"},
 
-	  {id: 17, name: "VP Student Life Office", color: "blue"},
-	  {id: 18, name: "Director of Campus Life", color: "blue"},
-	  {id: 19, name: "Services Manager", color: "blue"},
-	  {id: 20, name: "Clubs", color: "blue"},
-	  {id: 21, name: "Campus Response Team", color: "blue"},
-	  {id: 22, name: "Food Bank", color: "blue"},
-	  {id: 23, name: "GLOW", color: "blue"},
-	  {id: 24, name: "SCI", color: "blue"},
-	  {id: 25, name: "Off-Campus Community", color: "blue"},
-	  {id: 26, name: "Women's Centre", color: "blue"},
-	  {id: 27, name: "Special Events", color: "blue"},
-	  {id: 28, name: "Society Relations Commissioner", color: "blue"},
-	  {id: 29, name: "ICSN", color: "blue"},
-	  {id: 30, name: "Bike Centre", color: "blue"},
-	  {id: 31, name: "Co-op Connection", color: "blue"},
-	  {id: 32, name: "Volunteer Centre", color: "blue"},
-	  {id: 33, name: "Commissions", color: "blue"},
-	  {id: 34, name: "Warrior Tribe", color: "blue"},
-	  {id: 35, name: "Mates", color: "blue"},
+	  {id: 17, name: "VP Student Life Office", color: "#3F51B5"},
+	  {id: 18, name: "Director of Campus Life", color: "#3F51B5"},
+	  {id: 19, name: "Services Manager", color: "#3F51B5"},
+	  {id: 20, name: "Clubs", color: "#3F51B5"},
+	  {id: 21, name: "Campus Response Team", color: "#3F51B5"},
+	  {id: 22, name: "Food Bank", color: "#3F51B5"},
+	  {id: 23, name: "GLOW", color: "#3F51B5"},
+	  {id: 24, name: "SCI", color: "#3F51B5"},
+	  {id: 25, name: "Off-Campus Community", color: "#3F51B5"},
+	  {id: 26, name: "Women's Centre", color: "#3F51B5"},
+	  {id: 27, name: "Special Events", color: "#3F51B5"},
+	  {id: 28, name: "Society Relations Commissioner", color: "#3F51B5"},
+	  {id: 29, name: "ICSN", color: "#3F51B5"},
+	  {id: 30, name: "Bike Centre", color: "#3F51B5"},
+	  {id: 31, name: "Co-op Connection", color: "#3F51B5"},
+	  {id: 32, name: "Volunteer Centre", color: "#3F51B5"},
+	  {id: 33, name: "Commissions", color: "#3F51B5"},
+	  {id: 34, name: "Warrior Tribe", color: "#3F51B5"},
+	  {id: 35, name: "Mates", color: "#3F51B5"},
 
 	  {id: 36, name: "VP Education Office", color: "pink"},
 	  {id: 37, name: "Stakeholder Relations Manager", color: "pink"},
