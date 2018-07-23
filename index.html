@@ -7,36 +7,55 @@
   <script src="sk.d3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
   <link href="//rawgit.com/FabricioRHS/skd3/master/build/sk.d3.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
     <style type="text/css">
-        body {
-            margin: 40px auto;
-            line-height: 1.6;
-            font-size: 18px;
-            color: #444;
-            padding: 0 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-        }
+      body {
+        margin: 40px auto;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 18px;
+        color: #444;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
 
-    .content {
-      max-width: 650px;
-    }
+      .content {
+        width: 750px;
+      }
 
-    .footer {
-      text-align: center;
-    }
+      .feedback {
+        font-size: 20px;
+      }
 
-        h1,
-        h2,
-        h3 {
-            line-height: 1.2
-        }
-    #sankeyChart {
-      height: 960px;
-      width: 960px;
-    }
+      .credit {
+        font-size: 16px;
+      }
+
+      h1,
+      h2,
+      h3 {
+          line-height: 1.2
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      aside {
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 24px;
+      }
+
+      #sankeyChart {
+        height: 960px;
+        width: 960px;
+        margin: 50px 0 50px 0;
+      }
     </style>
 </head>
 <body>
@@ -51,18 +70,20 @@
     <p>Hover over a spending item (ie. President Portfolio) to easily see its breakdown.</p>
     <p>You can also drag and drop items on the chart to move them around.</p>
 
-    <p>If you have any feedback, please let us know via:</p>
-    <ul>
+    </div>
+
+  <div id="sankeyChart"/></div>
+  <div class="content footer">
+    <p class="feedback">If you have any feedback, please let us know via:</p>
+    <ul class="feedback">
       <li><a href="https://www.facebook.com/FedsCouncilMath/">Facebook</a></li>
       <li><a href="http://bit.ly/MathCouncilFeedback">Anonymously thru Google Form</a></li>
       <li>Emailing <a href="mailto:deon.hua@edu.uwaterloo.ca">Deon</a> or <a href="mailto:yc3hou@edu.uwaterloo.ca">Yu Chen</a></li>
     </ul>
 
-    <p>Made by Deon Hua and Yu Chen Hou, Feds Math Councilors.</p>
+
+    <p class="credit">Made with ❤️ by Deon Hua and Yu Chen Hou, Feds Math Councilors.</p>
   </div>
-
-  <div id="sankeyChart"/>
-
   <script>
   var configSankey = {
     margin: { top: 10, left: 10, right: 10, bottom: 10 },
