@@ -5,195 +5,216 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Feds Budget Visualization</title>
   <script src="sk.d3.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
-	<link href="//rawgit.com/FabricioRHS/skd3/master/build/sk.d3.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
+  <link href="//rawgit.com/FabricioRHS/skd3/master/build/sk.d3.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
     <style type="text/css">
-        body {
-            margin: 40px auto;
-            line-height: 1.6;
-            font-size: 18px;
-            color: #444;
-            padding: 0 10px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			flex-direction: column;
-        }
+      body {
+        margin: 40px auto;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 18px;
+        color: #444;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
 
-		.content {
-			max-width: 650px;
-		}
+      .content {
+        width: 750px;
+      }
 
-		.footer {
-			text-align: center;
-		}
+      .feedback {
+        font-size: 20px;
+      }
 
-        h1,
-        h2,
-        h3 {
-            line-height: 1.2
-        }
-		#sankeyChart {
-			height: 960px;
-			width: 960px;
-		}
+      .credit {
+        font-size: 16px;
+      }
+
+      h1,
+      h2,
+      h3 {
+          line-height: 1.2
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      aside {
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 24px;
+      }
+
+      #sankeyChart {
+        height: 960px;
+        width: 960px;
+        margin: 50px 0 50px 0;
+      }
     </style>
 </head>
 <body>
-	<div class="content">
-		<header>
-			<h1>Feds 2017-18 Budget Visualization</h1>
-			<aside>Understanding where Feds fees are going.</aside>
-		</header>
+  <div class="content">
+    <header>
+      <h1>Feds 2017-18 Budget Visualization</h1>
+      <aside>Understanding where your money is going.</aside>
+    </header>
     <p>This is a Sankey chart to visualize the <a href="https://uwaterloo.ca/feds/sites/ca.feds/files/uploads/files/2017-2018_federation_of_students_budget.xlsx">Feds Budget for the 2017-18 Fiscal Year.</a></p>
     <p>In the interest of readability, we didn't break down the numbers past the service/office level. Additional breakdowns can be found within the spreadsheet.</p>
 
     <p>Hover over a spending item (ie. President Portfolio) to easily see its breakdown.</p>
     <p>You can also drag and drop items on the chart to move them around.</p>
 
-    <p>If you have any feedback, please let us know via:</p>
-    <ul>
+    </div>
+
+  <div id="sankeyChart"/></div>
+  <div class="content footer">
+    <p class="feedback">If you have any feedback, please let us know via:</p>
+    <ul class="feedback">
       <li><a href="https://www.facebook.com/FedsCouncilMath/">Facebook</a></li>
       <li><a href="http://bit.ly/MathCouncilFeedback">Anonymously thru Google Form</a></li>
       <li>Emailing <a href="mailto:deon.hua@edu.uwaterloo.ca">Deon</a> or <a href="mailto:yc3hou@edu.uwaterloo.ca">Yu Chen</a></li>
     </ul>
 
-		<p>Made by Deon Hua and Yu Chen Hou, Feds Math Councilors.</p>
-	</div>
 
-	<div id="sankeyChart"/>
+    <p class="credit">Made with ❤️ by Deon Hua and Yu Chen Hou, Feds Math Councilors.</p>
+  </div>
+  <script>
+  var configSankey = {
+    margin: { top: 10, left: 10, right: 10, bottom: 10 },
+    nodes: {
+      dynamicSizeFontNode: {
+        enabled: true,
+        minSize: 14,
+        maxSize: 18
+      },
+      fontSize: 14, // if dynamicSizeFontNode not enabled
+      padding: 15,
+      draggableX: false, // default [ false ]
+      draggableY: true, // default [ true ]
+      colors: d3.scaleOrdinal(d3.schemeCategory10)
+    },
+    links: {
+      formatValue: function(val) {
+        return '$' + d3.format(",.2f")(val);
+      },
+      unit: '$' // if not set formatValue function
+    },
+    tooltip: {
+      infoDiv: true,  // if false display default tooltip
+      labelSource: 'Revenues',
+      labelTarget: 'Expenses'
+    }
+  }
 
-	<script>
-	var configSankey = {
-		margin: { top: 10, left: 10, right: 10, bottom: 10 },
-		nodes: {
-			dynamicSizeFontNode: {
-				enabled: true,
-				minSize: 14,
-				maxSize: 18
-			},
-			fontSize: 14, // if dynamicSizeFontNode not enabled
-			padding: 15,
-			draggableX: false, // default [ false ]
-			draggableY: true, // default [ true ]
-			colors: d3.scaleOrdinal(d3.schemeCategory10)
-		},
-		links: {
-			formatValue: function(val) {
-				return '$' + d3.format(",.2f")(val);
-			},
-			unit: '$' // if not set formatValue function
-		},
-		tooltip: {
-			infoDiv: true,  // if false display default tooltip
-			labelSource: 'Revenues',
-			labelTarget: 'Expenses'
-		}
-	}
+  var datajson = {nodes: [
+    {id: 0, name: "Total Expenses", color: "#f08080"},
 
-	var datajson = {nodes: [
-	  {id: 0, name: "Total Expenses", color: "#f08080"},
+    {id: 1, name: "President Portfolio", color: "#FF5722"},
+    {id: 2, name: "VP Operations and Finance Portfolio", color: "#512DA8"},
+    {id: 3, name: "VP Student Life Portfolio", color: "#3F51B5"},
+    {id: 4, name: "VP Education Portfolio", color: "pink"},
+    {id: 5, name: "Marketing", color: "#800000"},
+    {id: 6, name: "General Office", color: "#800000"},
+    {id: 7, name: "Service Salaries", color: "#800000"},
+    {id: 8, name: "Community Kitchen", color: "#800000"},
+    {id: 9, name: "IT", color: "#800000"},
 
-	  {id: 1, name: "President Portfolio", color: "#FF5722"},
-	  {id: 2, name: "VP Operations and Finance Portfolio", color: "#512DA8"},
-	  {id: 3, name: "VP Student Life Portfolio", color: "#3F51B5"},
-	  {id: 4, name: "VP Education Portfolio", color: "pink"},  
-	  {id: 5, name: "Marketing", color: "#800000"},
-	  {id: 6, name: "General Office", color: "#800000"},
-	  {id: 7, name: "Service Salaries", color: "#800000"},
-	  {id: 8, name: "Community Kitchen", color: "#800000"}, 
-	  {id: 9, name: "IT", color: "#800000"},
-	  
-	  {id: 10, name: "President Office", color: "#FF5722"},
-	  {id: 11, name: "Orientation", color: "#FF5722"},
-	  {id: 12, name: "Elections", color: "#FF5722"},
-	  {id: 13, name: "Research and Policy Officer", color: "#FF5722"},
-	  {id: 14, name: "Student Government", color: "#FF5722"},
+    {id: 10, name: "President Office", color: "#FF5722"},
+    {id: 11, name: "Orientation", color: "#FF5722"},
+    {id: 12, name: "Elections", color: "#FF5722"},
+    {id: 13, name: "Research and Policy Officer", color: "#FF5722"},
+    {id: 14, name: "Student Government", color: "#FF5722"},
 
-	  {id: 15, name: "VP Operations and Finance Office", color: "#512DA8"},
-	  {id: 16, name: "Director of Commercial Operations", color: "#512DA8"},
+    {id: 15, name: "VP Operations and Finance Office", color: "#512DA8"},
+    {id: 16, name: "Director of Commercial Operations", color: "#512DA8"},
 
-	  {id: 17, name: "VP Student Life Office", color: "#3F51B5"},
-	  {id: 18, name: "Director of Campus Life", color: "#3F51B5"},
-	  {id: 19, name: "Services Manager", color: "#3F51B5"},
-	  {id: 20, name: "Clubs", color: "#3F51B5"},
-	  {id: 21, name: "Campus Response Team", color: "#3F51B5"},
-	  {id: 22, name: "Food Bank", color: "#3F51B5"},
-	  {id: 23, name: "GLOW", color: "#3F51B5"},
-	  {id: 24, name: "SCI", color: "#3F51B5"},
-	  {id: 25, name: "Off-Campus Community", color: "#3F51B5"},
-	  {id: 26, name: "Women's Centre", color: "#3F51B5"},
-	  {id: 27, name: "Special Events", color: "#3F51B5"},
-	  {id: 28, name: "Society Relations Commissioner", color: "#3F51B5"},
-	  {id: 29, name: "ICSN", color: "#3F51B5"},
-	  {id: 30, name: "Bike Centre", color: "#3F51B5"},
-	  {id: 31, name: "Co-op Connection", color: "#3F51B5"},
-	  {id: 32, name: "Volunteer Centre", color: "#3F51B5"},
-	  {id: 33, name: "Commissions", color: "#3F51B5"},
-	  {id: 34, name: "Warrior Tribe", color: "#3F51B5"},
-	  {id: 35, name: "Mates", color: "#3F51B5"},
+    {id: 17, name: "VP Student Life Office", color: "#3F51B5"},
+    {id: 18, name: "Director of Campus Life", color: "#3F51B5"},
+    {id: 19, name: "Services Manager", color: "#3F51B5"},
+    {id: 20, name: "Clubs", color: "#3F51B5"},
+    {id: 21, name: "Campus Response Team", color: "#3F51B5"},
+    {id: 22, name: "Food Bank", color: "#3F51B5"},
+    {id: 23, name: "Glow", color: "#3F51B5"},
+    {id: 24, name: "Sustainable Campus Initiative", color: "#3F51B5"},
+    {id: 25, name: "Off-Campus Community", color: "#3F51B5"},
+    {id: 26, name: "Women's Centre", color: "#3F51B5"},
+    {id: 27, name: "Special Events", color: "#3F51B5"},
+    {id: 28, name: "Society Relations Commissioner", color: "#3F51B5"},
+    {id: 29, name: "International & Canadian Student Network", color: "#3F51B5"},
+    {id: 30, name: "Bike Centre", color: "#3F51B5"},
+    {id: 31, name: "Co-op Connection", color: "#3F51B5"},
+    {id: 32, name: "Volunteer Centre", color: "#3F51B5"},
+    {id: 33, name: "Commissions", color: "#3F51B5"},
+    {id: 34, name: "Warrior Tribe", color: "#3F51B5"},
+    {id: 35, name: "Mates", color: "#3F51B5"},
 
-	  {id: 36, name: "VP Education Office", color: "pink"},
-	  {id: 37, name: "Stakeholder Relations Manager", color: "pink"},
-	  {id: 38, name: "OUSA", color: "pink"},
-	  {id: 39, name: "Academic Affairs", color: "pink"},
-	  {id: 40, name: "Local Affairs", color: "pink"},
+    {id: 36, name: "VP Education Office", color: "pink"},
+    {id: 37, name: "Stakeholder Relations Manager", color: "pink"},
+    {id: 38, name: "Ontario Undergraduate Student Alliance", color: "pink"},
+    {id: 39, name: "Academic Affairs", color: "pink"},
+    {id: 40, name: "Local Affairs", color: "pink"},
 
     {id: 41, name: "Student Fees", color: "green"},
-	  {id: 42, name: "Interest", color: "green"},
+    {id: 42, name: "Interest", color: "green"},
 
-	],
-	links: [
+  ],
+  links: [
     {source: 41, target: 0, value: 3074928.57},
-	  {source: 42, target: 0, value: 12000.00},
+    {source: 42, target: 0, value: 12000.00},
 
-	  {source: 0, target: 1, value: 98110.98},
-	  {source: 0, target: 2, value: 81931.18},
-	  {source: 0, target: 3, value: 357851.18},
-	  {source: 0, target: 4, value: 196554.46},
-	  {source: 0, target: 5, value: 191309.00},
-	  {source: 0, target: 6, value: 618499.65},
-	  {source: 0, target: 7, value: 1272800.00},
-	  {source: 0, target: 8, value: 13000.00},
-	  {source: 0, target: 9, value: 268438.04},
+    {source: 0, target: 1, value: 98110.98},
+    {source: 0, target: 2, value: 81931.18},
+    {source: 0, target: 3, value: 357851.18},
+    {source: 0, target: 4, value: 196554.46},
+    {source: 0, target: 5, value: 191309.00},
+    {source: 0, target: 6, value: 618499.65},
+    {source: 0, target: 7, value: 1272800.00},
+    {source: 0, target: 8, value: 13000.00},
+    {source: 0, target: 9, value: 268438.04},
 
-	  {source: 1, target: 10, value: 70981.18},
-	  {source: 1, target: 11, value: 11743.80},
-	  {source: 1, target: 12, value: 9275.00},
-	  {source: 1, target: 13, value: 1410.00},
-	  {source: 1, target: 14, value: 4701.00},
+    {source: 1, target: 10, value: 70981.18},
+    {source: 1, target: 11, value: 11743.80},
+    {source: 1, target: 12, value: 9275.00},
+    {source: 1, target: 13, value: 1410.00},
+    {source: 1, target: 14, value: 4701.00},
 
-	  {source: 2, target: 15, value: 77621.18},
-	  {source: 2, target: 16, value: 4310.00},
+    {source: 2, target: 15, value: 77621.18},
+    {source: 2, target: 16, value: 4310.00},
 
-	  {source: 3, target: 17, value: 92681.18},
-	  {source: 3, target: 18, value: 12850.00},
-	  {source: 3, target: 19, value: 36410.00},
-	  {source: 3, target: 20, value: 44421.00},
-	  {source: 3, target: 21, value: 15980.00},
-	  {source: 3, target: 22, value: 4490.00},
-	  {source: 3, target: 23, value: 11365.00},
-	  {source: 3, target: 24, value: 6850.00},
-	  {source: 3, target: 25, value: 8745.00},
-	  {source: 3, target: 26, value: 7150},
-	  {source: 3, target: 27, value: 86780},
-  	{source: 3, target: 28, value: 3500},
-	  {source: 3, target: 29, value: 6618},
-	  {source: 3, target: 30, value: 605},
-	  {source: 3, target: 31, value: 3460},
-	  {source: 3, target: 32, value: 4998},
-	  {source: 3, target: 33, value: 2},
-	  {source: 3, target: 34, value: 6300},
-	  {source: 3, target: 35, value: 4650},
+    {source: 3, target: 17, value: 92681.18},
+    {source: 3, target: 18, value: 12850.00},
+    {source: 3, target: 19, value: 36410.00},
+    {source: 3, target: 20, value: 44421.00},
+    {source: 3, target: 21, value: 15980.00},
+    {source: 3, target: 22, value: 4490.00},
+    {source: 3, target: 23, value: 11365.00},
+    {source: 3, target: 24, value: 6850.00},
+    {source: 3, target: 25, value: 8745.00},
+    {source: 3, target: 26, value: 7150},
+    {source: 3, target: 27, value: 86780},
+    {source: 3, target: 28, value: 3500},
+    {source: 3, target: 29, value: 6618},
+    {source: 3, target: 30, value: 605},
+    {source: 3, target: 31, value: 3460},
+    {source: 3, target: 32, value: 4998},
+    {source: 3, target: 33, value: 2},
+    {source: 3, target: 34, value: 6300},
+    {source: 3, target: 35, value: 4650},
 
-	  {source: 4, target: 36, value: 90938.58},
-	  {source: 4, target: 37, value: 1900},
-	  {source: 4, target: 38, value: 101990.88},
-	  {source: 4, target: 39, value: 825},
-	  {source: 4, target: 40, value: 900},
-	]};
-	var objSankey = sk.createSankey('#sankeyChart', configSankey, datajson);
-	</script>
+    {source: 4, target: 36, value: 90938.58},
+    {source: 4, target: 37, value: 1900},
+    {source: 4, target: 38, value: 101990.88},
+    {source: 4, target: 39, value: 825},
+    {source: 4, target: 40, value: 900},
+  ]};
+  var objSankey = sk.createSankey('#sankeyChart', configSankey, datajson);
+  </script>
 </body>
 
 </html>
