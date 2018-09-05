@@ -88,27 +88,42 @@
       a:active {
         text-decoration: underline;
       }
+
+      .year-switcher h2{
+        display: inline-block;
+        padding-right: 10px;
+        text-decoration: underline;
+      }
     </style>
 </head>
 <body>
   <div class="content">
     <header>
-      <h1>Feds 2017-18 Budget Visualization</h1>
+      <h1>Feds Budget Visualization</h1>
       <aside>Understanding where your money is going.</aside>
     </header>
-    <p>This is a Sankey chart to visualize the <a href="https://uwaterloo.ca/feds/sites/ca.feds/files/uploads/files/2017-2018_federation_of_students_budget.xlsx">Feds Budget for the 2017-18 Fiscal Year.</a></p>
+    <p>This is a Sankey chart to visualize the Feds Budgets for the <a href="https://uwaterloo.ca/feds/sites/ca.feds/files/uploads/files/2017-2018_federation_of_students_budget.xlsx">2017-18</a> and <a href="http://lists.feds.ca/pipermail/council/attachments/20180810/7df29f9c/attachment-0001.xlsx">2018-19</a> fiscal years.</p>
     <p>In the interest of readability, we didn't break down the numbers past the service/office level. Additional breakdowns can be found within the spreadsheet.</p>
 
     <p>Hover over a spending item (ie. President Portfolio) to easily see its breakdown.</p>
     <p>You can also drag and drop items on the chart to move them around.</p>
+
+    <br />
+    <div class="year-switcher">
+      <p>Select fiscal year to visualize:</p>
+      <h2 onclick="changeYear(2017)">FY2017</h1>
+      <h2 onclick="changeYear(2018)">FY2018</h1>
+    </div>
   </div>
 
   <div id="sankeyChart"/></div>
   <div class="content footer">
     <div>
       <aside class="notes">A few notes:</aside>
-      <aside class="notes">Exec Office budgets are not only purely allocated to salary, it also includes project spending from that VP as well as operational and discretionary spending.</aside>
-      <aside class="notes">This graph only includes where your student fees are going. Some programs, like the Bike Centre, have additional revenue streams which are not reflected in this visualization.</aside>
+      <aside class="notes">Exec Office budgets are not only purely allocated to salary, it also includes project spending from that Exec as well as operational and discretionary spending.</aside>
+      <aside class="notes">This graph only includes where your student fees are going. some programs, like the bike centre, have additional revenue streams which are not reflected in this visualization.</aside>
+      <aside class="notes">Orientation fees were mostly moved from the students fees budget to the orientation fee, per the Winter 2018 GM.</aside>
+      <aside class="notes">The Community Kitchen was moved to the Commercial Operations budget in FY2018, resulting in no expenses from the student fees budget.</aside>
     </div>
     <p class="feedback">If you have any feedback, please let us know via:</p>
     <ul class="feedback">
@@ -250,7 +265,125 @@
     {source: 4, target: 39, value: 825},
     {source: 4, target: 40, value: 900},
   ]};
+
+  var datajson2019 = {nodes: [
+    {id: 0, name: "Total Expenses", color: "#f08080"},
+
+    {id: 1, name: "President Portfolio", color: "#FF5722"},
+    {id: 2, name: "VP Operations and Finance Portfolio", color: "#512DA8"},
+    {id: 3, name: "VP Student Life Portfolio", color: "#3F51B5"},
+    {id: 4, name: "VP Education Portfolio", color: "pink"},
+    {id: 5, name: "Marketing", color: "#800000"},
+    {id: 6, name: "General Office", color: "#800000"},
+    {id: 7, name: "Service Salaries", color: "#800000"},
+    {id: 8, name: "Community Kitchen", color: "#800000"},
+    {id: 9, name: "IT", color: "#800000"},
+
+    {id: 10, name: "President Office", color: "#FF5722"},
+    {id: 11, name: "Orientation", color: "#FF5722"},
+    {id: 12, name: "Elections", color: "#FF5722"},
+    {id: 13, name: "Research and Policy Officer", color: "#FF5722"},
+    {id: 14, name: "Student Government", color: "#FF5722"},
+
+    {id: 15, name: "VP Operations and Finance Office", color: "#512DA8"},
+    {id: 16, name: "Director of Commercial Operations", color: "#512DA8"},
+
+    {id: 17, name: "VP Student Life Office", color: "#3F51B5"},
+    {id: 18, name: "Director of Campus Life", color: "#3F51B5"},
+    {id: 19, name: "Services Manager", color: "#3F51B5"},
+    {id: 20, name: "Clubs", color: "#3F51B5"},
+    {id: 21, name: "Campus Response Team", color: "#3F51B5"},
+    {id: 22, name: "Food Bank", color: "#3F51B5"},
+    {id: 23, name: "Glow", color: "#3F51B5"},
+    {id: 24, name: "Sustainable Campus Initiative", color: "#3F51B5"},
+    {id: 25, name: "Off-Campus Community", color: "#3F51B5"},
+    {id: 26, name: "Women's Centre", color: "#3F51B5"},
+    {id: 27, name: "Special Events", color: "#3F51B5"},
+    {id: 28, name: "Society Relations Commissioner", color: "#3F51B5"},
+    {id: 29, name: "International & Canadian Student Network", color: "#3F51B5"},
+    {id: 30, name: "Bike Centre", color: "#3F51B5"},
+    {id: 31, name: "Co-op Connection", color: "#3F51B5"},
+    {id: 32, name: "Volunteer Centre", color: "#3F51B5"},
+    {id: 33, name: "Commissions", color: "#3F51B5"},
+    {id: 34, name: "Warrior Tribe", color: "#3F51B5"},
+    {id: 35, name: "Mates", color: "#3F51B5"},
+
+    {id: 36, name: "VP Education Office", color: "pink"},
+    {id: 37, name: "Stakeholder Relations Manager", color: "pink"},
+    {id: 38, name: "Ontario Undergraduate Student Alliance", color: "pink"},
+    {id: 39, name: "Academic Affairs", color: "pink"},
+    {id: 40, name: "Local Affairs", color: "pink"},
+
+    {id: 41, name: "Student Fees", color: "green"},
+    {id: 42, name: "Interest", color: "green"},
+
+    {id: 43, name: "New Diversity & Inclusivity Service", color: "#3F51B5"},
+
+  ],
+  links: [
+    {source: 41, target: 0, value: 3419622.61},
+    {source: 42, target: 0, value: 19200.00},
+
+    {source: 0, target: 1, value: 87728.68},
+    {source: 0, target: 2, value: 75678.68},
+    {source: 0, target: 3, value: 331766.38},
+    {source: 0, target: 4, value: 198573.68},
+    {source: 0, target: 5, value: 215761.20},
+    {source: 0, target: 6, value: 809654.15},
+    {source: 0, target: 7, value: 1442000.00},
+    {source: 0, target: 8, value: 0},
+    {source: 0, target: 9, value: 277300.16},
+
+    {source: 1, target: 10, value: 70468.68},
+    {source: 1, target: 11, value: 1490.00},
+    {source: 1, target: 12, value: 6300.00},
+    {source: 1, target: 13, value: 870.00},
+    {source: 1, target: 14, value: 8600.00},
+
+    {source: 2, target: 15, value: 72173.68},
+    {source: 2, target: 16, value: 3505.00},
+
+    {source: 3, target: 17, value: 86293.68},
+    {source: 3, target: 18, value: 6300.00},
+    {source: 3, target: 19, value: 47075.00},
+    {source: 3, target: 20, value: 33791.70},
+    {source: 3, target: 21, value: 14790.00},
+    {source: 3, target: 22, value: 3990.00},
+    {source: 3, target: 23, value: 12345.00},
+    {source: 3, target: 24, value: 5630.00},
+    {source: 3, target: 25, value: 8570.00},
+    {source: 3, target: 26, value: 6510.00},
+    {source: 3, target: 27, value: 82600.00},
+    {source: 3, target: 28, value: 2300.00},
+    {source: 3, target: 29, value: 3658.00},
+    {source: 3, target: 30, value: -2800.00},
+    {source: 3, target: 31, value: 2435.00},
+    {source: 3, target: 32, value: 3628.00},
+    {source: 3, target: 33, value: 0},
+    {source: 3, target: 34, value: 4570.00},
+    {source: 3, target: 35, value: 4880.00},
+    {source: 3, target: 43, value: 7200.00},
+
+    {source: 4, target: 36, value: 90938.58},
+    {source: 4, target: 37, value: 1900},
+    {source: 4, target: 38, value: 101990.88},
+    {source: 4, target: 39, value: 825},
+    {source: 4, target: 40, value: 900},
+  ]};
   var objSankey = sk.createSankey('#sankeyChart', configSankey, datajson);
+
+  function changeYear(year) {
+    switch(year) {
+      case 2017:
+        objSankey.updateData(datajson);
+        break;
+      case 2018:
+        objSankey.updateData(datajson2019);
+        break;
+      default:
+        return;
+    }
+  }
   </script>
 </body>
 
