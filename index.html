@@ -91,8 +91,30 @@
 
       .year-switcher h2{
         display: inline-block;
-        padding-right: 10px;
-        text-decoration: underline;
+        margin-right: 10px;
+      }
+
+      .showing {
+        background: #51BBFE !important;
+        color:#fff !important;
+      }
+      .button {
+        line-height: 40px;
+        text-align: center;
+        outline:none;
+        height: 40px;
+        width: 130px;
+        border-radius:40px;
+        background: #fff;
+        border: 2px solid #51BBFE;
+        color:#51BBFE;
+        letter-spacing:1px;
+        text-shadow:0;
+        cursor: pointer;
+      }
+      .button:hover {
+        color:white;
+        background: rgb(118, 202, 255);
       }
     </style>
 </head>
@@ -111,8 +133,8 @@
     <br />
     <div class="year-switcher">
       <p>Select fiscal year to visualize:</p>
-      <h2 onclick="changeYear(2017)">FY2017</h1>
-      <h2 onclick="changeYear(2018)">FY2018</h1>
+      <h2 id="2017" class="showing button" onclick="changeYear(2017)">FY2017</h1>
+      <h2 id="2018" class="button" onclick="changeYear(2018)">FY2018</h1>
     </div>
   </div>
 
@@ -373,12 +395,19 @@
   var objSankey = sk.createSankey('#sankeyChart', configSankey, datajson);
 
   function changeYear(year) {
+    var h2017 = document.getElementById("2017");
+    var h2018 = document.getElementById("2018");
+    h2017.classList.remove("showing");
+    h2018.classList.remove("showing");
+
     switch(year) {
       case 2017:
         objSankey.updateData(datajson);
+        h2017.classList.add("showing");
         break;
       case 2018:
         objSankey.updateData(datajson2019);
+        h2018.classList.add("showing");
         break;
       default:
         return;
