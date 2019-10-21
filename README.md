@@ -1,3 +1,6 @@
+# NOTICE
+This repo is out of date (and we have graduated), and we're looking for contributors who would like to update the visualization to work with the latest Feds budgets. Please feel free to submit a PR if you are interested.
+
 # FedsBudget
 
 This Sankey chart is a visualization of the 2017-18 Feds Budget. We created this to inform the student body and to promote discussion around where student fees are being spent.
